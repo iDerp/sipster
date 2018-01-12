@@ -14,7 +14,7 @@
         "<!(node -e \"require('nan')\")"
       ],
       'conditions': [
-        [ 'OS!="win"', {
+        [ 'OS=="linux"', {
           'cflags_cc': [
             '<!@(pkg-config --atleast-version=2.4.5 libpjproject)',
             '<!@(pkg-config --cflags libpjproject)',
@@ -26,22 +26,22 @@
           ],
         }],
         [ 'OS=="mac"', {
+          'cflags_cc': [
+            '<!@(pkg-config --atleast-version=2.4.5 libpjproject)',
+            '<!@(pkg-config --cflags libpjproject)',
+            '-fexceptions',
+            '-Wno-maybe-uninitialized',
+          ],
+          'libraries': [
+            # '<!@(pkg-config --libs libpjproject)', # makes "clang: error: no such file or directory: 'AppKit'"
+            '-L/usr/local/lib -lpjsua2 -lstdc++ -lpjsua -lpjsip-ua -lpjsip-simple -lpjsip -lpjmedia-codec -lpjmedia -lpjmedia-videodev -lpjmedia-audiodev -lpjmedia -lpjnath -lpjlib-util -lsrtp -lresample -lgsmcodec -lspeex -lilbccodec -lg7221codec -lwebrtc -lpj -lopus -lm -lpthread -framework CoreAudio -framework CoreServices -framework AudioUnit -framework AudioToolbox -framework Foundation -framework AppKit'
+          ],
           'xcode_settings': {
             'OTHER_CFLAGS': [
               '-fexceptions',
               '-frtti',
-            ],
+            ]
           },
-
-          # begin gyp stupidity workaround =====================================
-          'libraries!': [
-            'AppKit',
-          ],
-          'libraries': [
-            'AppKit.framework',
-          ],
-          # end gyp stupidity workaround =======================================
-
         }],
       ],
     },
