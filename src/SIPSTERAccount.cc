@@ -136,7 +136,8 @@ AccountConfig SIPSTERAccount::genConfig(Local<Object> acct_obj) {
       SIPSTERTransport* trans =
         Nan::ObjectWrap::Unwrap<SIPSTERTransport>(Local<Object>::Cast(val));
       sipConfig.transportId = trans->transId;
-    }
+    } else
+        sipConfig.transportId = -1;
 
     acct_cfg.sipConfig = sipConfig;
   }
