@@ -41,7 +41,7 @@ uv_async_t logging;
 bool ep_init = false;
 bool ep_create = false;
 bool ep_start = false;
-EpConfig ep_cfg;
+EpConfig ep_cfg = {};
 
 list<SIPEventInfo> event_queue;
 uv_mutex_t event_mutex;

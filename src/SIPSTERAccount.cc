@@ -27,7 +27,7 @@ AccountConfig SIPSTERAccount::genConfig(Local<Object> acct_obj) {
 
   val = acct_obj->Get(Nan::New("regConfig").ToLocalChecked());
   if (val->IsObject()) {
-    AccountRegConfig regConfig;
+    AccountRegConfig regConfig = {};
     Local<Object> reg_obj = val->ToObject();
     JS2PJ_STR(reg_obj, registrarUri, regConfig);
     JS2PJ_BOOL(reg_obj, registerOnAdd, regConfig);
@@ -65,7 +65,7 @@ AccountConfig SIPSTERAccount::genConfig(Local<Object> acct_obj) {
   }
   val = acct_obj->Get(Nan::New("sipConfig").ToLocalChecked());
   if (val->IsObject()) {
-    AccountSipConfig sipConfig;
+    AccountSipConfig sipConfig = {};
     Local<Object> sip_obj = val->ToObject();
 
     val = sip_obj->Get(Nan::New("authCreds").ToLocalChecked());
