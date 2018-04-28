@@ -1,0 +1,37 @@
+sudo: required
+language: node_js
+node_js:
+  - "9"
+  - "8"
+env:
+  - VERSION_PJSIP=2.7.1
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - wget
+      - pkg-config
+      - build-essential
+      - python
+      - gcc-4.9
+      - g++-4.9
+before_install:
+    - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.9
+    - wget -nv "http://www.pjsip.org/release/$VERSION_PJSIP/pjproject-$VERSION_PJSIP.tar.bz2" -O - | tar xjf -
+    - cd pjproject-$VERSION_PJSIP
+    - >
+      ./configure
+      --enable-shared
+      --disable-sound
+      --disable-oss
+      --disable-sdl
+      --disable-speex-aec
+      --disable-video
+      > /dev/null
+    - make dep all
+    - sudo make install
+    - sudo ldconfig
+install:
+  - npm install
+script: npm test

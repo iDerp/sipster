@@ -600,9 +600,10 @@ NAN_METHOD(SIPSTERAccount::MakeCall) {
     return Nan::ThrowTypeError("Missing call destination");
 
   Handle<Value> new_call_args[1] = { info.This() };
-  Local<Object> call_obj =
-    Nan::New(SIPSTERCall_constructor)->GetFunction()
-                                     ->NewInstance(1, new_call_args);
+  v8::Local<v8::Function> cons
+    = Nan::New(SIPSTERCall_constructor)->GetFunction();
+  Local<Object> call_obj
+    = Nan::NewInstance(cons, 1, new_call_args).ToLocalChecked();
   SIPSTERCall* call = Nan::ObjectWrap::Unwrap<SIPSTERCall>(call_obj);
 
   try {

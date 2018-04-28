@@ -5,7 +5,7 @@
   "description": "A pjsip binding for node.js",
   "main": "./lib/main",
   "dependencies": {
-    "nan": "^2.8.0"
+    "nan": "^2.10.0"
   },
   "os": [
     "!win32"
@@ -26,5 +26,20 @@
   "repository": {
     "type": "git",
     "url": "http://github.com/mscdex/sipster.git"
+  },
+  "scripts": {
+    "test": "jest --forceExit"
+  },
+  "devDependencies": {
+    "jest": "^22.4.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "testMatch": [
+      "**/test/**/*.test.js"
+    ],
+    "testEnvironment": "node"
   }
 }

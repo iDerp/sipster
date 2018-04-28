@@ -1,0 +1,31 @@
+FROM sipster-gcc4.9
+MAINTAINER KINOSHITA minoru <5021543+minoruta@users.noreply.github.com>
+
+ARG VERSION_PJSIP=2.7.1
+
+#
+#   Prepare requirments
+#
+RUN apt -qq update \
+&&  apt -qq install -y \
+        wget \
+&&  apt-get clean \
+&&  rm -rf /var/lib/apt/lists/*
+
+#
+#   Prepare PJSIP
+#
+RUN wget -nv "http://www.pjsip.org/release/$VERSION_PJSIP/pjproject-$VERSION_PJSIP.tar.bz2" -O - | tar xjf - \
+&&  cd pjproject-$VERSION_PJSIP \
+&&  ./configure \
+  --enable-shared \
+  --disable-sound \
+  --disable-oss \
+  --disable-sdl \
+  --disable-speex-aec \
+  --disable-video \
+  > /dev/null \
+&& make dep all \
+&& make install \
+&& make clean \
+&& ldconfig
