@@ -13,6 +13,7 @@
         "src",
         "<!(node -e \"require('nan')\")"
       ],
+      'cflags_cc+': ['-g3'],
       'conditions': [
         [ 'OS=="linux"', {
           'cflags_cc': [

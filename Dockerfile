@@ -20,18 +20,26 @@ RUN apt -qq update \
         python \
         curl \
         git \
+        vim \
+        gdb \
 &&  curl -sL https://deb.nodesource.com/setup_$NODEJS.x | sudo -E bash - \
 &&  apt -qq install -y nodejs \
-&&  npm -qq install -g node-gyp \
 &&  apt-get clean \
 &&  rm -rf /var/lib/apt/lists/*
+
+#
+#   Prepare nodejs
+#
+RUN cd /root/sipster \
+&&  npm -qq install -g node-gyp \
+&&  npm -qq install --unsafe-perm
 
 #
 #   Test
 #
 CMD cd /root/sipster \
 &&  node --version \
-&&  npm install --unsafe-perm > /dev/null \
+&&  ulimit -c unlimited \
 &&  npm test \
 &&  echo ====================================================== \
 &&  echo ======================== GOOD ======================== \
