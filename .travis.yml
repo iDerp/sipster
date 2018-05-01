@@ -4,7 +4,7 @@ node_js:
   - "node"
   - "lts/*"
 env:
-  - VERSION_PJSIP=2.7.1 VERSION_LIBSRTP=2.1.0
+  - VERSION_PJSIP=2.7.2 VERSION_LIBSRTP=2.1.0
 addons:
   apt:
     packages:
