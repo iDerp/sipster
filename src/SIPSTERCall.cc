@@ -81,10 +81,41 @@ NAN_METHOD(SIPSTERCall::Answer) {
   SIPSTERCall* call = Nan::ObjectWrap::Unwrap<SIPSTERCall>(info.This());
 
   CallOpParam prm;
-  if (info.Length() > 0 && info[0]->IsUint32()) {
-    prm.statusCode = static_cast<pjsip_status_code>(info[0]->Int32Value());
-    if (info.Length() > 1 && info[1]->IsString()) {
-      Nan::Utf8String reason_str(info[1]);
+  int offset = 0;
+  if (info.Length() > offset && info[offset]->IsArray()) {
+    // custom `SipHeaders` [optional] which is an array consists of `SipHeader`;
+    Local<Value> val;
+    SipHeaderVector sipHeaderVector;
+    const Local<Array> arr_obj = Local<Array>::Cast(info[offset]);
+    const uint32_t arr_length = arr_obj->Length();
+
+    if (arr_length > 0) {
+      sipHeaderVector.reserve(arr_length);
+      for (uint32_t i = 0; i < arr_length; ++i) {
+        const Local<Value> aHeader = arr_obj->Get(i);
+        if (aHeader->IsObject()) {
+          SipHeader sipHeader;
+          Local<Object> aHeader_obj = aHeader->ToObject();
+          JS2PJ_STR(aHeader_obj, hName, sipHeader);
+          JS2PJ_STR(aHeader_obj, hValue, sipHeader);
+          sipHeaderVector.push_back(sipHeader);
+        }
+        else
+          return Nan::ThrowTypeError("Not SipHeaderVector");
+      }
+    }
+    SipTxOption sipTxOption;
+    sipTxOption.headers = sipHeaderVector;
+    prm.txOption = sipTxOption;
+    offset++;
+  }
+  if (info.Length() > offset && info[offset]->IsUint32()) {
+    // status code [optional]
+    prm.statusCode = static_cast<pjsip_status_code>(info[offset]->Int32Value());
+    offset++;
+    if (info.Length() > offset && info[offset]->IsString()) {
+      // reason [optional]
+      Nan::Utf8String reason_str(info[offset]);
       prm.reason = string(*reason_str);
     }
   } else

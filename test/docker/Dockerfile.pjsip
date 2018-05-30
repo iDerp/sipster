@@ -41,6 +41,16 @@ RUN wget -nv "http://www.pjsip.org/release/$VERSION_PJSIP/pjproject-$VERSION_PJS
   --disable-sdl \
   --disable-speex-aec \
   --disable-video \
+  --disable-small-filter \
+  --disable-large-filter \
+  --disable-speex-aec \
+  --disable-l16-codec \
+  --disable-gsm-codec \
+  --disable-g722-codec \
+  --disable-g7221-codec \
+  --disable-speex-codec \
+  --disable-ilbc-codec \
+  --disable-opus \
   > /dev/null \
 && make dep all \
 && make install \

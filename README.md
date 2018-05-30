@@ -176,8 +176,15 @@ Account methods
 
 * **setTransport**(< _Transport_ >trans) - _(void)_ - Lock/bind the given transport to this account. Normally you shouldn't need to do this, as transports will be selected automatically by the library according to the destination. When an account is locked/bound to a specific transport, all outgoing requests from this account will use the specified transport (this includes SIP registration, dialog (call and event subscription), and out-of-dialog requests such as MESSAGE).
 
-* **makeCall**(< _string_ >destination) - _Call_ - Start a new SIP call to `destination`.
+* **makeCall**(< _string_ >destination, [<_integer_>status code, <_string_>reason], [<_array_>[SipHeaders](http://www.pjsip.org/pjsip/docs/html/structpj_1_1SipHeader.htm
+)]) - _Call_ - Start a new SIP call to `destination` with optional custom `SipHeaders` which is an array consists of `SipHeader`;
+  ```json
+  [{
+    "hName": "name of custom sip header",
+    "hValue": "value of it"  
+  }]
 
+  ```
 
 Account properties
 ------------------
@@ -212,7 +219,10 @@ Account events
 Call methods
 ------------
 
-* **answer**([< _integer_ >statusCode[, < _string_ >reason]]) - _(void)_ - For incoming calls, this responds to the INVITE with an optional `statusCode` (defaults to 200) and optional `reason` phrase.
+* **answer**([< _array_ >[SipHeaders](http://www.pjsip.org/pjsip/docs/html/structpj_1_1SipHeader.htm), [< _integer_ >statusCode[, < _string_ >reason]]) - _(void)_ - For incoming calls, this responds to the INVITE with an optional [SipHeaders](http://www.pjsip.org/pjsip/docs/html/structpj_1_1SipHeader.htm
+), an optional `statusCode` (defaults to 200) and optional `reason` phrase.
+    - `SipHeaders`: Optional list of headers etc to be added to outgoing response message. Note that this message data will be persistent in all next answers/responses for this INVITE request.
+
 
 * **hangup**([< _integer_ >statusCode[, < _string_ >reason]]) - _(void)_ - Hangs up the call with an optional `statusCode` (defaults to 603) and optional `reason` phrase. This function is different than answering the call with 3xx-6xx response (with answer()), in that this function will hangup the call regardless of the state and role of the call, while answer() only works with incoming calls on EARLY state.
 
@@ -287,4 +297,3 @@ Media events
 ------------
 
 * **eof**() - This is only applicable to player or playlist Media objects and indicates that the end of the file or end of playlist has been reached.
-

@@ -11,6 +11,71 @@ Object {
 }
 `;
 
+exports[`sipster hang up the inbound call 1`] = `
+Object {
+  "content": "v=0
+o=- DNC
+s=pjmedia
+b=AS:84
+t=0 0
+a=X-nat:0
+m=audio 4004 RTP/AVP 0
+c=IN IP4 DNC
+b=TIAS:64000
+a=rtcp:4005 IN IP4 DNC
+a=sendrecv
+a=rtpmap:0 PCMU/8000
+",
+  "headers": Object {
+    "allow": "PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS",
+    "call-id": "DNC",
+    "contact": Array [
+      Object {
+        "params": Object {},
+        "uri": "sip:6001@127.0.0.1:5060;ob",
+      },
+    ],
+    "content-length": "DNC",
+    "content-type": "application/sdp",
+    "cseq": Object {
+      "method": "INVITE",
+      "seq": "DNC",
+    },
+    "from": Object {
+      "params": Object {
+        "tag": "DNC",
+      },
+      "uri": "sip:6002@127.0.0.1",
+    },
+    "supported": "replaces, 100rel, timer, norefersub",
+    "to": Object {
+      "params": Object {
+        "tag": "DNC",
+      },
+      "uri": "sip:6001@127.0.0.1",
+    },
+    "via": Array [
+      Object {
+        "host": "DNC",
+        "params": Object {
+          "branch": "DNC",
+          "received": "127.0.0.1",
+          "rport": "5062",
+        },
+        "port": 5062,
+        "protocol": "UDP",
+        "version": "2.0",
+      },
+    ],
+    "x-test-header-name1": "test-header-value1",
+    "x-test-header-name2": "test-header-value2",
+  },
+  "reason": "OK",
+  "status": 200,
+  "version": "2.0",
+}
+`;
+
 exports[`sipster initialize pjsip 1`] = `
 Object {
   "EpConfig": Object {
@@ -69,12 +134,193 @@ exports[`sipster initialize pjsip 3`] = `254`;
 
 exports[`sipster initialize pjsip 4`] = `"init"`;
 
+exports[`sipster make an outbound call #2 1`] = `
+Object {
+  "content": "v=0
+o=- DNC
+s=pjmedia
+b=AS:84
+t=0 0
+a=X-nat:0
+m=audio 4002 RTP/AVP 0 8 96
+c=IN IP4 DNC
+b=TIAS:64000
+a=rtcp:4003 IN IP4 DNC
+a=sendrecv
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:96 telephone-event/8000
+a=fmtp:96 0-16
+",
+  "headers": Object {
+    "allow": "PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS",
+    "call-id": "DNC",
+    "contact": Array [
+      Object {
+        "params": Object {},
+        "uri": "sip:6001@127.0.0.1:5060;ob",
+      },
+    ],
+    "content-length": "DNC",
+    "content-type": "application/sdp",
+    "cseq": Object {
+      "method": "INVITE",
+      "seq": "DNC",
+    },
+    "from": Object {
+      "params": Object {
+        "tag": "DNC",
+      },
+      "uri": "sip:6001@127.0.0.1",
+    },
+    "max-forwards": "70",
+    "min-se": "90",
+    "session-expires": "1800",
+    "supported": "replaces, 100rel, timer, norefersub",
+    "to": Object {
+      "params": Object {
+        "tag": "DNC",
+      },
+      "uri": "sip:6002@127.0.0.1",
+    },
+    "via": Array [
+      Object {
+        "host": "DNC",
+        "params": Object {
+          "branch": "DNC",
+          "received": "127.0.0.1",
+          "rport": 5060,
+        },
+        "port": 5060,
+        "protocol": "UDP",
+        "version": "2.0",
+      },
+    ],
+  },
+  "method": "INVITE",
+  "uri": "sip:6002@127.0.0.1:5062",
+  "version": "2.0",
+}
+`;
+
+exports[`sipster make an outbound call 1`] = `
+Object {
+  "content": "v=0
+o=- DNC
+s=pjmedia
+b=AS:84
+t=0 0
+a=X-nat:0
+m=audio 4000 RTP/AVP 0 8 96
+c=IN IP4 DNC
+b=TIAS:64000
+a=rtcp:4001 IN IP4 DNC
+a=sendrecv
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:96 telephone-event/8000
+a=fmtp:96 0-16
+",
+  "headers": Object {
+    "allow": "PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS",
+    "call-id": "DNC",
+    "contact": Array [
+      Object {
+        "params": Object {},
+        "uri": "sip:6001@127.0.0.1:5060;ob",
+      },
+    ],
+    "content-length": "DNC",
+    "content-type": "application/sdp",
+    "cseq": Object {
+      "method": "INVITE",
+      "seq": "DNC",
+    },
+    "from": Object {
+      "params": Object {
+        "tag": "DNC",
+      },
+      "uri": "sip:6001@127.0.0.1",
+    },
+    "max-forwards": "70",
+    "min-se": "90",
+    "session-expires": "1800",
+    "supported": "replaces, 100rel, timer, norefersub",
+    "to": Object {
+      "params": Object {
+        "tag": "DNC",
+      },
+      "uri": "sip:6002@127.0.0.1",
+    },
+    "via": Array [
+      Object {
+        "host": "DNC",
+        "params": Object {
+          "branch": "DNC",
+          "received": "127.0.0.1",
+          "rport": 5060,
+        },
+        "port": 5060,
+        "protocol": "UDP",
+        "version": "2.0",
+      },
+    ],
+    "x-test-header-name": "test-header-value",
+  },
+  "method": "INVITE",
+  "uri": "sip:6002@127.0.0.1:5062",
+  "version": "2.0",
+}
+`;
+
+exports[`sipster receive an inbound call 1`] = `
+Object {
+  "content": "",
+  "headers": Object {
+    "call-id": "DNC",
+    "content-length": "DNC",
+    "cseq": Object {
+      "method": "INVITE",
+      "seq": "DNC",
+    },
+    "from": Object {
+      "params": Object {
+        "tag": "DNC",
+      },
+      "uri": "sip:6002@127.0.0.1",
+    },
+    "to": Object {
+      "params": Object {
+        "tag": "DNC",
+      },
+      "uri": "sip:6001@127.0.0.1",
+    },
+    "via": Array [
+      Object {
+        "host": "DNC",
+        "params": Object {
+          "branch": "DNC",
+          "received": "127.0.0.1",
+          "rport": "5062",
+        },
+        "port": 5062,
+        "protocol": "UDP",
+        "version": "2.0",
+      },
+    ],
+  },
+  "reason": "Trying",
+  "status": 100,
+  "version": "2.0",
+}
+`;
+
 exports[`sipster set up a SIP account, we need at least one 1`] = `
 Object {
-  "regExpiresSec": -1,
+  "regExpiresSec": 0,
   "regIsActive": false,
-  "regIsConfigured": false,
-  "uri": "sip:192.168.100.10",
+  "regIsConfigured": true,
+  "uri": "sip:6001@127.0.0.1",
 }
 `;
 
@@ -95,15 +341,15 @@ Object {
 
 exports[`sipster set up a transport to listen for incoming connections, defaults to UDP 2`] = `true`;
 
-exports[`sipster wait for any events 1`] = `"running"`;
+exports[`sipster unregister account 1`] = `"running"`;
 
-exports[`sipster wait for any events 2`] = `
+exports[`sipster unregister account 2`] = `
 Object {
-  "call": 0,
-  "registered": 0,
-  "registering": 0,
-  "state": 0,
-  "unregistered": 0,
-  "unregistering": 0,
+  "call": 1,
+  "registered": 1,
+  "registering": 1,
+  "state": 1,
+  "unregistered": 1,
+  "unregistering": 1,
 }
 `;
